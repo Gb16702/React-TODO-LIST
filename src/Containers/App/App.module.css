@@ -1,0 +1,68 @@
+.App {
+  margin: auto;
+  width: 100%;
+  max-width: 700px;
+  margin-top: 50px;
+}
+
+.App header {
+  text-transform: uppercase;
+  color: transparent;
+  color: #9e88e9;
+  font-size: 4rem;
+  padding: 30px;
+  text-align: center;
+  font-weight: bold;
+}
+
+.App .add {
+  background-color: #9e88e9;
+  padding: 15px 30px;
+  -webkit-box-shadow: 0 2px 2px 0 rgba(0,0,0,0.14), 0 1px 5px 0 rgba(0,0,0,0.12), 0 3px 1px -2px rgba(0,0,0,0.2);
+	box-shadow: 0 2px 2px 0 rgba(0,0,0,0.14), 0 1px 5px 0 rgba(0,0,0,0.12), 0 3px 1px -2px rgba(0,0,0,0.2);
+  margin-bottom: 30px;
+  border-radius: 5px;
+}
+
+.App .add form {
+  display: flex;
+  align-items: center;
+}
+
+.App .add input {
+  border: 1px solid white;
+  border-radius: 500px;
+  padding: 10px 10px 10px 20px;
+  width: 100%;
+  font-size: 1rem;
+  outline: none;
+  color: #314e52;
+  font-weight: 300;
+}
+
+.App .add button {
+  background: white;
+  color: #9e88e9;
+  padding: 10px 20px;
+  border: 0;
+  border-radius: 15px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  font-size: 1em;
+  margin-left: 15px;
+}
+
+.App .add button svg {
+  margin-right: 5px;
+}
+
+.red {
+  background: red;
+}
+
+@media all and (max-width: 740px) {
+  .App .add {
+    padding: 13px 11px
+  }
+}
