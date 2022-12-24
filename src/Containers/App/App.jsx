@@ -1,9 +1,28 @@
-import React, { useState, useRef, useEffect } from 'react';
-import classes from './App.module.css';
+import React, { useState, useRef, useEffect, useContext } from 'react';
+import  classes from './App.module.css';
 import Task from '../../Components/Task/Task.jsx';
 import axios from '../../axios-firebase'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faArrowRight } from '@fortawesome/free-solid-svg-icons'
+import {ThemeContext, themes} from '../Context/theme'
+import styled from 'styled-components'
+
+
 
 function App() {
+
+  const {theme, toggleTheme} = useContext(ThemeContext)
+  console.log(theme)
+
+  const ToggleTheme = styled.div`
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  background: ${theme === 'dark-theme' ? themes.dark.background : themes.light.background }
+  `
+
 
   // States
   const [tasks, setTasks] = useState([]);
@@ -69,12 +88,16 @@ function App() {
       removeClicked={() => removeClickedHandler(index)}
       doneClicked={() => doneClickedHandler(index)}
     />
+
   ));
 
   return (
-    <div className={classes.App}>
+    <ToggleTheme>
+    <div className = {`${theme}`}>
+    <div className={classes.App} >
+      { <button onClick ={() => toggleTheme()} ></button> }
       <header>
-        <span>TO-DO</span>
+        <span>React To-DO</span>
       </header>
 
       <div className={classes.add}>
@@ -86,19 +109,17 @@ function App() {
             onChange={(e) => changedFormHandler(e)
 
             }
-            placeholder="Que souhaitez-vous ajouter ?" />
-          <button type="submit">
-            Ajouter
+            placeholder="Ajouter une tâche ?" />
+          <button className={classes.iconContainer} type="submit">
+            <FontAwesomeIcon className={classes.arrow} icon = {faArrowRight} />
           </button>
         </form>
       </div>
-      <div className='TaskContainer' >
 
-        {tasksDisplayed.done ? classes.red : tasksDisplayed }
-
-
-      </div>
+        {tasksDisplayed}
     </div>
+    </div>
+    </ToggleTheme>
   );
 }
 
