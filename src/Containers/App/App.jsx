@@ -3,16 +3,10 @@ import  classes from './App.module.css';
 import Task from '../../Components/Task/Task.jsx';
 import axios from '../../axios-firebase'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faArrowRight } from '@fortawesome/free-solid-svg-icons'
+import { faArrowRight, faMoon, faSun } from '@fortawesome/free-solid-svg-icons'
 import {ThemeContext, themes} from '../Context/theme'
 import styled from 'styled-components'
 
-
-
-function App() {
-
-  const {theme, toggleTheme} = useContext(ThemeContext)
-  console.log(theme)
 
   const ToggleTheme = styled.div`
   position: absolute;
@@ -20,8 +14,14 @@ function App() {
   height: 100%;
   top: 0;
   left: 0;
-  background: ${theme === 'dark-theme' ? themes.dark.background : themes.light.background }
+  background: ${props => props.background === 'dark-theme' ? 'black' : 'white'}
   `
+
+function App() {
+
+  const {theme, toggleTheme} = useContext(ThemeContext)
+  console.log(theme)
+
 
 
   // States
@@ -92,12 +92,16 @@ function App() {
   ));
 
   return (
-    <ToggleTheme>
+    <ToggleTheme background = {theme}>
     <div className = {`${theme}`}>
     <div className={classes.App} >
-      { <button onClick ={() => toggleTheme()} ></button> }
+      { <button onClick ={() => toggleTheme()} style = {{background: 'none', position: 'absolute', top: '24px', right: '24px', fontSize: '24px'}} >{theme === 'dark-theme' ?
+      <FontAwesomeIcon className={classes.sun} icon = {faSun} />
+      :
+      <FontAwesomeIcon className={classes.moon} icon = {faMoon} />
+      }</button> }
       <header>
-        <span>React To-DO</span>
+        <span>React To-Do</span>
       </header>
 
       <div className={classes.add}>
