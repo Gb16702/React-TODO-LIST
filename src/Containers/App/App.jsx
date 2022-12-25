@@ -7,22 +7,21 @@ import { faArrowRight, faMoon, faSun } from '@fortawesome/free-solid-svg-icons'
 import {ThemeContext, themes} from '../Context/theme'
 import styled from 'styled-components'
 
-
   const ToggleTheme = styled.div`
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  top: 0;
-  left: 0;
-  background: ${props => props.background === 'dark-theme' ? 'black' : 'white'}
+  background: ${props => props.background === 'dark-theme' ? '#20232a' : 'white'}
   `
-
+  const ToggleThemeInput = styled.div`
+  background : ${props => props.backgroundTheme === 'dark-theme' ? "#61dafb" : '#9e88e9'}
+  `
+const IconTheme = styled(FontAwesomeIcon)`
+color: ${props => props.iconColor === 'dark-theme' ? '#61dafb !important' : '#9e88e9'}
+`
+const SpanTheme = styled.span`
+  color: ${props => props.spanColor === 'dark-theme' ? '#61dafb !important': '#9e88e9'}
+`
 function App() {
 
   const {theme, toggleTheme} = useContext(ThemeContext)
-  console.log(theme)
-
-
 
   // States
   const [tasks, setTasks] = useState([]);
@@ -78,6 +77,8 @@ function App() {
   }
 
 
+
+
   // Variables
   let tasksDisplayed = tasks.map((task, index) => (
     <Task
@@ -92,8 +93,17 @@ function App() {
   ));
 
   return (
-    <ToggleTheme background = {theme}>
-    <div className = {`${theme}`}>
+    <ToggleTheme background = {theme} style = {{
+      position: 'absolute',
+      width: '100%',
+      height: '100%',
+      top: '0',
+      left: '0',
+      display: 'flex',
+      alignItems:'center',
+      justifyContent:'center'
+    }}>
+    <div className = {classes.englober}>
     <div className={classes.App} >
       { <button onClick ={() => toggleTheme()} style = {{background: 'none', position: 'absolute', top: '24px', right: '24px', fontSize: '24px'}} >{theme === 'dark-theme' ?
       <FontAwesomeIcon className={classes.sun} icon = {faSun} />
@@ -101,10 +111,10 @@ function App() {
       <FontAwesomeIcon className={classes.moon} icon = {faMoon} />
       }</button> }
       <header>
-        <span>React To-Do</span>
+        <SpanTheme className= {classes.title} spanColor = {theme}>React To-Do</SpanTheme>
       </header>
 
-      <div className={classes.add}>
+      <ToggleThemeInput className={classes.add} backgroundTheme = {theme}>
         <form onSubmit={(e) => submittedTaskHandler(e)}>
           <input
             ref = {targetInput}
@@ -115,10 +125,10 @@ function App() {
             }
             placeholder="Ajouter une tâche ?" />
           <button className={classes.iconContainer} type="submit">
-            <FontAwesomeIcon className={classes.arrow} icon = {faArrowRight} />
+            <IconTheme className={classes.arrow} icon = {faArrowRight} iconColor = {theme} />
           </button>
         </form>
-      </div>
+      </ToggleThemeInput>
 
         {tasksDisplayed}
     </div>
